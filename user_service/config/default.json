@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "lumina_servicekey",
+  "PORT": "4000",
+  "NODE_ENV": "development"
+}
