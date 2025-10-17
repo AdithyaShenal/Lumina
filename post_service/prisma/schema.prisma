@@ -11,6 +11,7 @@ model posts {
   post_id    String   @id @unique(map: "post_id") @db.Char(36)
   user_id    String   @db.VarChar(24)
   image_url   String   @db.VarChar(2048)
+  image_name  String   @db.VarChar(1024)
   time_stamp DateTime @db.DateTime(0)
   caption    String?  @db.Text
   location   String?  @db.VarChar(255)

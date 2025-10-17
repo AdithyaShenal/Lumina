@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@azure/storage-blob": "^12.29.1",
     "@prisma/client": "^6.17.1",
     "bcrypt": "^6.0.0",
     "config": "^4.1.1",
