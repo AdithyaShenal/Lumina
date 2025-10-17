@@ -1,27 +1,28 @@
 import express from "express";
 const app = express();
-import mysql from "mysql2";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
+import { v7 as uuidv7 } from "uuid";
 
-app.use(express.json());
+const prisma = new PrismaClient();
 
-// Create a Post
-app.post("/api/posts", (req, res) => {});
+async function addPost() {
+  const post = await prisma.posts.create({
+    data: {
+      post_id: uuidv7(),
+      user_id: "ABCD123",
+      post_url: "http://ahdodpiodpioahdpoid/com",
+      time_stamp: new Date(),
+      caption: "New World",
+      location: "Polis",
+      post_type: "Images",
+    },
+  });
 
-const pool = mysql
-  .createPool({
-    host: "localhost",
-    user: "root",
-    password: "adithya123",
-    database: "lumina_postservicedb",
-  })
-  .promise();
-
-async function getPosts() {
-  const [rows] = await pool.query("SELECT * FROM posts");
-  console.log(rows);
+  console.log(post);
 }
 
-getPosts();
+addPost();
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

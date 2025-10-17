@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model posts {
+  post_id    String   @id @unique(map: "post_id") @db.VarChar(36)
+  user_id    String   @db.VarChar(24)
+  post_url   String   @db.VarChar(2048)
+  time_stamp DateTime @db.DateTime(0)
+  caption    String?  @db.Text
+  location   String?  @db.VarChar(255)
+  post_type  String?  @default("Image") @db.VarChar(50)
+}
