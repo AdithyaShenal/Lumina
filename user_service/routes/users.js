@@ -10,14 +10,13 @@ import auth from "../middleware/auth.js";
 import multer from "multer";
 import _ from "lodash";
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const blobService = BlobServiceClient.fromConnectionString(
   config.get("AZURE_STORAGE_CONNECTION_STRING")
 );
-
 const containerClient = blobService.getContainerClient("lumina-blob");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // me
 router.get("/me", auth, async (req, res) => {
