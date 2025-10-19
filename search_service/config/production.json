@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "lumina_servicekey",
-  "PORT": "3003"
+  "PORT": "3002"
 }

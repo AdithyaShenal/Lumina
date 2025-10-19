@@ -9,6 +9,7 @@ import User, { validate } from "../models/user.js";
 import auth from "../middleware/auth.js";
 import multer from "multer";
 import _ from "lodash";
+import axios from "axios";
 
 const blobService = BlobServiceClient.fromConnectionString(
   config.get("AZURE_STORAGE_CONNECTION_STRING")
@@ -56,6 +57,19 @@ router.post("/", upload.single("profile_image"), async (req, res) => {
     };
     console.log(blockBlobClient.url);
   }
+
+  // -----------------event-------------------------------------
+
+  const message = {
+    type: "userRegistered",
+    data: req.body,
+  };
+
+  axios
+    .post("http://localhost:3004/api/events", message)
+    .catch((error) => console.log(error));
+
+  // -----------------------------------------------------------
 
   user = new User(
     _.pick(req.body, [

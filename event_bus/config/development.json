@@ -1,6 +1,6 @@
 {
   "jwtPrivateKey": "lumina_servicekey",
-  "PORT": "3003",
+  "PORT": "3005",
   "SAS_TOKEN": "sv=2024-11-04&ss=bfqt&srt=o&sp=rwdlacupiytfx&se=2025-10-16T14:50:05Z&st=2025-10-16T06:35:05Z&spr=https&sig=ohAYAS7tJHYgYYQpi2ozcDxEtYl0labErMHZWfk0NBE%3D",
   "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=luminawebapp;AccountKey=2uTcO/vesWp6qhIhpM/DnLTHrBftx/OUfaGRD1ixcTtUb2gpPJ7LMj1mGeLfNiEBGqJuA9djtI5f+AStrJg1nw==;EndpointSuffix=core.windows.net"
 }
