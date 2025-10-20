@@ -17,12 +17,10 @@ router.post("/", async (req, res) => {
   // Emitting to Search and Timeline Services
   axios
     .post("http://localhost:3002/api/search/events", event)
-    .catch((error) =>
-      console.log("Error (Route still bot configured):", error.message)
-    );
+    .catch((error) => console.log("Error", error));
 
   axios
-    .post("http://localhost:3003/api/timeline/events", event)
+    .post("http://localhost:3004/api/timeline/events", event)
     .catch((error) =>
       console.log("Error (Route still bot configured):", error.message)
     );

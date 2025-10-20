@@ -66,7 +66,7 @@ router.post("/", upload.single("profile_image"), async (req, res) => {
   };
 
   axios
-    .post("http://localhost:3004/api/events", message)
+    .post("http://localhost:3005/api/events", message)
     .catch((error) => console.log(error));
 
   // -----------------------------------------------------------

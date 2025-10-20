@@ -6,6 +6,8 @@ const eventSchema = new mongoose.Schema({
     type: String,
     enum: [
       "userRegistered",
+      "createdFollowing",
+      "createdUnfollowing",
       "userUpdated",
       "postCreated",
       "postUpdated",
@@ -23,6 +25,8 @@ export async function validation(body) {
     type: Joi.string()
       .valid(
         "userRegistered",
+        "createdFollowing",
+        "createdUnfollowing",
         "userUpdated",
         "postCreated",
         "postUpdated",

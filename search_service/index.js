@@ -12,8 +12,8 @@ mongoose
 
 // Middlwares
 app.use(express.json());
-app.use("/", events);
-app.use("/", search);
+app.use("/api/search/events", events);
+app.use("/api/search/", search);
 app.use(error);
 
 const port = process.env.PORT || 3002;

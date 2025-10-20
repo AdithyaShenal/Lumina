@@ -18,11 +18,11 @@ followerSchema.index({ user_id: 1, target_user_id: 1 }, { unique: true });
 
 const Follower = mongoose.model("Followers", followerSchema);
 
-export async function followerValidate(body) {
+export function followerValidate(body) {
   const schema = Joi.object({
     user_id: Joi.string().max(36).required(),
     target_user_id: Joi.string().max(36).required(),
-  });
+  }).options({ stripUnknown: true });
 
   return schema.validate(body);
 }

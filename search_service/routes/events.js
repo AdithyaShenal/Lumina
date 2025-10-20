@@ -4,7 +4,7 @@ import User, { userEventsValidate } from "../models/user.js";
 import Follower, { followerValidate } from "../models/follower.js";
 
 // Listening to Events
-router.post("/api/search/events", async (req, res) => {
+router.post("/", async (req, res) => {
   const { type, data } = req.body;
 
   if (type === "userRegistered") {
@@ -26,26 +26,37 @@ router.post("/api/search/events", async (req, res) => {
 
   if (type === "createdFollowing") {
     // validate incoming follower data
-    const { error } = await followerValidate(data);
+
+    const { error } = followerValidate(data);
     if (error)
       return res.status(400).json({ message: error.details[0].message });
 
     // After validation straightly going to database.
-    const follower = new Follower(data);
-    await follower.save();
+
+    try {
+      const follower = new Follower(data);
+      await follower.save();
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          error: err.message,
+          message: "Already following",
+        });
+      }
+    }
 
     return res.status(201).json({});
   }
 
   if (type === "createdUnfollowing") {
     // validate incoming follower data
-    const { error } = await followerValidate(data);
+    const { error } = followerValidate(data);
     if (error)
       return res.status(400).json({ message: error.details[0].message });
 
-    // After validation straightly going to database.
-    const follower = new Follower(data);
-    await follower.save();
+    // Straightly Delete the Record
+    const result = await Follower.deleteOne(data);
 
     return res.status(201).json({});
   }
