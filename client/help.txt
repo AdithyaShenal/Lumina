@@ -1,0 +1,15 @@
+--Border Color Setup--
+border-gray-300
+
+
+--Shadow Setup--
+shadow-gray-300/85
+md:shadow-sm
+
+
+--Primary Accent Color--
+text-sky-900
+
+
+--Secondary Accent Color--
+hover:bg-sky-100
