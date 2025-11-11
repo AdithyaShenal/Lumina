@@ -43,6 +43,9 @@
 .container {
   width: 100%;
 
+  @media (width >= 28rem /* 448px */) {
+    max-width: 28rem /* 448px */;
+  }
   @media (width >= 40rem /* 640px */) {
     max-width: 40rem /* 640px */;
   }
