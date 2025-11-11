@@ -1,0 +1,26 @@
+{
+  "name": "@adithya_shenal/nats",
+  "version": "1.0.7",
+  "description": "",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "rimraf ./build",
+    "build": "npm run clean && tsc",
+    "pub": "npm version patch && npm run build && npm publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "node-nats-streaming": "^0.3.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "rimraf": "^6.1.0"
+  }
+}

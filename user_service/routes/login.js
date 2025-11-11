@@ -1,24 +1,34 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "../models/user.js";
-import _ from "lodash";
-import config from "config";
-import Joi from "joi";
 import express from "express";
 const router = express.Router();
+import Joi from "joi";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
+import config from "config";
+import bcrypt from "bcrypt";
+import _ from "lodash";
 
-// Register Users
+// Login Users
+// (Chekced - Successfull)
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).json({ message: error.details[0].message });
+  if (error)
+    return res.status(400).json({
+      success: false,
+      message: error.details[0].message,
+    });
 
   let user = await User.findOne({ email: req.body.email });
+
   if (!user)
-    return res.status(400).json({ message: "Invalid email or password" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid email or password" });
 
   const isValidPwd = await bcrypt.compare(req.body.password, user.password);
   if (!isValidPwd)
-    return res.status(400).json({ message: "Invalid email or password" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid email or password" });
 
   const token = jwt.sign(
     { _id: user.id, isAdmin: user.isAdmin },

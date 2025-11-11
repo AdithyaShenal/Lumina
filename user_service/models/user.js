@@ -77,6 +77,21 @@ export function validate(user) {
     age: Joi.number().min(0).max(80),
     location: Joi.string().min(2).max(50),
     interests: Joi.array().items(Joi.string()),
+    profile_image: Joi.any().optional(),
+  });
+
+  return schema.validate(user);
+}
+
+export function updateValidate(user) {
+  const schema = Joi.object({
+    first_name: Joi.string().min(5).max(50),
+    last_name: Joi.string().min(5).max(50),
+    phone_number: Joi.string().min(10).max(20),
+    age: Joi.number().min(0).max(80),
+    location: Joi.string().min(2).max(50),
+    interests: Joi.array().items(Joi.string()),
+    profile_image: Joi.any().optional(),
   });
 
   return schema.validate(user);

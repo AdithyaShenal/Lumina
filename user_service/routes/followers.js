@@ -2,22 +2,31 @@ import express from "express";
 const router = express.Router();
 import Follower, { validate } from "../models/follower.js";
 import auth from "../middleware/auth.js";
-import axios from "axios";
+import { natsClient } from "../events/nats-client.js";
+import UserFollowedPublisher from "../events/publishers/user-followed-publisher.js";
+import UserUnfollowedPublisher from "../events/publishers/user-unfollowed-publisher.js";
 
-// A user following another user (following request)
-router.post("/:user_id/:target_user_id", auth, async (req, res) => {
-  const { error } = await validate({
-    user_id: req.params.user_id,
+// A user following another user (following request) (Checked Successfull)
+router.post("/:target_user_id", auth, async (req, res) => {
+  const { error } = validate({
     target_user_id: req.params.target_user_id,
   });
 
-  if (error) return res.status(400).json({ message: error.details[0].message });
+  if (req.user._id === req.params.target_user_id) {
+    return res.status(400).send({ success: false, message: "Invalid Request" });
+  }
+
+  if (error) {
+    return res
+      .status(400)
+      .json({ success: false, message: error.details[0].message });
+  }
 
   let followers;
 
   try {
     followers = new Follower({
-      user_id: req.params.user_id,
+      user_id: req.user._id,
       target_user_id: req.params.target_user_id,
     });
 
@@ -25,42 +34,34 @@ router.post("/:user_id/:target_user_id", auth, async (req, res) => {
   } catch (err) {
     if (err.code === 11000) {
       // For Duplicate key error handling
-      return res.status(400).json({ message: "Already following" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Already following" });
     }
-    return next(err);
+    next(err);
   }
 
-  const message = {
-    type: "createdFollowing",
-    data: {
-      user_id: followers.user_id,
-      target_user_id: followers.target_user_id,
-    },
-  };
+  // Event Publish (Checked Successfull)
 
-  // -------------------------- sending event
-
-  axios
-    .post("http://localhost:3005/api/events/", message)
-    .catch((err) => console.log(err));
-
-  // --------------------------
+  new UserFollowedPublisher(natsClient.client).publish(followers);
 
   res.status(201).json(followers);
 });
 
-// A User unfollowing a followed user
-router.post("/unfollow/:user_id/:target_user_id", auth, async (req, res) => {
-  const { error } = await validate({
-    user_id: req.params.user_id,
+// A User unfollowing a followed user (Checked Succesfull)
+router.post("/unfollow/:target_user_id", auth, async (req, res) => {
+  const { error } = validate({
     target_user_id: req.params.target_user_id,
   });
 
-  if (error) return res.status(400).json({ message: error.details[0].message });
+  if (error)
+    return res
+      .status(400)
+      .json({ success: false, message: error.details[0].message });
 
-  const result = await Follower.deleteOne(
+  const deletedFollow = await Follower.findOneAndDelete(
     {
-      user_id: req.params.user_id,
+      user_id: req.user._id,
       target_user_id: req.params.target_user_id,
     }
     // { new: true } this method exists only for
@@ -68,23 +69,18 @@ router.post("/unfollow/:user_id/:target_user_id", auth, async (req, res) => {
     // /findOneAndReplace/findByIdAndReplace
   );
 
-  // -------------------------- sending event
+  if (!deletedFollow) {
+    return res.status(404).send({ success: false, message: "User not found" });
+  }
 
-  const message = {
-    type: "createdUnfollowing",
-    data: {
-      user_id: req.params.user_id,
-      target_user_id: req.params.target_user_id,
-    },
-  };
+  // Event Publish (Checked Successfull)
 
-  axios
-    .post("http://localhost:3005/api/events/", message)
-    .catch((err) => console.log(err.message));
+  new UserUnfollowedPublisher(natsClient.client).publish({
+    user_id: req.user._id,
+    target_user_id: req.params.target_user_id,
+  });
 
-  // --------------------------
-
-  res.status(200).json(result);
+  res.status(200).json(deletedFollow);
 });
 
 export default router;

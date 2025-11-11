@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@adithya_shenal/nats": "^1.0.7",
     "@azure/storage-blob": "^12.29.1",
     "@prisma/client": "^6.17.1",
     "bcrypt": "^6.0.0",
@@ -22,6 +23,7 @@
     "lodash": "^4.17.21",
     "multer": "^2.0.2",
     "mysql2": "^3.15.2",
+    "node-nats-streaming": "^0.3.2",
     "nodemon": "^3.1.10",
     "prisma": "^6.17.1",
     "uuid": "^13.0.0"

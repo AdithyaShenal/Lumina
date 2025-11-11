@@ -14,3 +14,5 @@ Port - 3004
 
 Event Service
 Port - 3005
+
+NATS Port - 4222

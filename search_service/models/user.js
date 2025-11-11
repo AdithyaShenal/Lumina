@@ -38,16 +38,6 @@ const userSchema = new mongoose.Schema(
       minlength: 10,
       maxlength: 20,
     },
-    password: {
-      type: String,
-      minlength: 8,
-      maxlength: 255,
-      required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
     age: {
       type: Number,
       min: 0,
@@ -73,7 +63,6 @@ export function userEventsValidate(user) {
     last_name: Joi.string().min(5).max(50).required(),
     email: Joi.string().email().min(5).max(50).required(),
     profile_image: Joi.object(),
-    password: Joi.string().min(5).max(50).required(),
     phone_number: Joi.string().min(10).max(20),
     age: Joi.number().min(0).max(80),
     location: Joi.string().min(2).max(50),

@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Optional: still fine to keep if you want to separate base */
+@import "tailwindcss/preflight" layer(base);
+
+/* custom style (ignore the error on theme) */
+@theme {
+  --font-momo: "Momo Signature", cursive;
+  --font-quicksand: "Quicksand", sans-serif;
+}
+
+@layer base {
+  body {
+    /* font-family: "Quicksand", sans-serif; */
+    font-family: var(--font-quicksand);
+  }
+
+  h1 {
+    @apply text-6xl font-bold;
+  }
+
+  h2 {
+    @apply text-5xl font-bold;
+  }
+
+  h3 {
+    @apply text-4xl font-bold;
+  }
+
+  h4 {
+    @apply text-3xl font-bold;
+  }
+
+  h5 {
+    @apply text-2xl font-bold;
+  }
+
+  h6 {
+    @apply text-xl font-bold;
+  }
+}
+
+.container {
+  width: 100%;
+
+  @media (width >= 40rem /* 640px */) {
+    max-width: 40rem /* 640px */;
+  }
+  @media (width >= 48rem /* 768px */) {
+    max-width: 48rem /* 768px */;
+  }
+  @media (width >= 64rem /* 1024px */) {
+    max-width: 64rem /* 1024px */;
+  }
+  @media (width >= 80rem /* 1280px */) {
+    max-width: 88rem /* 1280px */;
+  }
+}

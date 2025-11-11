@@ -5,12 +5,15 @@ import config from "config";
 import { v7 as uuidv7 } from "uuid";
 import crypto from "crypto";
 import prisma from "../startup/dbClient.js";
+import { natsClient } from "../events/nats-client.js";
 import validate, {
   deletePostValidation,
   updatePostValidation,
 } from "../validation/post.js";
 import multer from "multer";
 import auth from "../middleware/auth.js";
+import PostDeletedPublisher from "../events/publishers/post-deleted-publisher.js";
+import PostCreatedPublisher from "../events/publishers/post-created-publisher.js";
 
 const blobService = BlobServiceClient.fromConnectionString(
   config.get("AZURE_STORAGE_CONNECTION_STRING")
@@ -46,10 +49,9 @@ router.post("/", auth, upload.single("post_image"), async (req, res) => {
     req.body["image_url"] = blockBlobClient.url;
     req.body["image_name"] = blobName;
 
-    // Debug
-    console.log(blockBlobClient.url);
+    console.log(blockBlobClient.url); // Debug
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ success: false, message: err });
   }
 
   const post = await prisma.posts.create({
@@ -65,10 +67,14 @@ router.post("/", auth, upload.single("post_image"), async (req, res) => {
     },
   });
 
+  // Event Publish
+
+  new PostCreatedPublisher(natsClient.client).publish(post);
+
   res.status(201).json(post);
 });
 
-// Update a Post (Only text data updation allowed otherwise delete whole post)
+// Update a Post (Only text data updating allowed otherwise delete whole post)
 router.put("/", auth, async (req, res) => {
   const { error } = updatePostValidation(req.body);
   if (error) return res.status(400).json({ error: error.details[0].message });
@@ -105,7 +111,7 @@ router.delete("/", auth, async (req, res) => {
   const blockBlobClient = containerClient.getBlockBlobClient(post.image_name);
   const deleteResponse = await blockBlobClient.deleteIfExists();
 
-  console.log(deleteResponse.succeeded);
+  console.log("Delete Post Image: ", deleteResponse.succeeded);
 
   if (!deleteResponse.succeeded)
     return res
@@ -122,6 +128,12 @@ router.delete("/", auth, async (req, res) => {
     return res.status(404).json({ error: "Post with given ID not found." });
 
   console.log(`Post Deleted: ${post}`);
+
+  // Event Publish
+
+  new PostDeletedPublisher(natsClient.client).publish({
+    post_id: req.body.post_id,
+  });
 
   res.status(200).json(post);
 });

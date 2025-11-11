@@ -1,14 +1,45 @@
 import winston from "winston";
-const { combine, timestamp, printf, json } = winston.format;
+const { combine, timestamp, printf, colorize } = winston.format;
 
-export const logger = winston.createLogger({
-  level: "info",
-  format: combine(timestamp(), json()),
+const logFormat = printf(
+  ({ level, message, timestamp }) => `[${timestamp}] ${level}: ${message}`
+);
+
+export const errorLogger = winston.createLogger({
+  level: "error",
+  format: combine(
+    colorize(), // adds color for levels
+    timestamp({ format: "HH:mm:ss" }), // short time format
+    logFormat
+  ),
   defaultMeta: { service: "user-service" },
   transports: [
     new winston.transports.Console(),
-    // new winston.transports.File({ filename: "error.log", level: "error" }),
-    // new winston.transports.File({ filename: "logfile.log", level: "info" }),
+    new winston.transports.File({
+      filename: "error.log",
+      level: "error",
+      format: combine(timestamp(), logFormat),
+    }),
+  ],
+});
+
+export const infoLogger = winston.createLogger({
+  level: "info",
+  format: combine(
+    colorize(), // adds color for levels
+    timestamp({ format: "HH:mm:ss" }), // short time format
+    printf(
+      ({ level, message, timestamp }) => `[${timestamp}] ${level}: ${message}`
+    )
+  ),
+  defaultMeta: { service: "user-service" },
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({
+      filename: "log.log",
+      level: "info",
+      format: combine(timestamp(), logFormat),
+    }),
   ],
 });
 

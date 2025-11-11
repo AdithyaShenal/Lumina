@@ -1,6 +1,6 @@
-import { logger } from "../startup/logger.js";
+import logger from "../logger.js";
 
 export default function (err, req, res, next) {
-  res.status(500).json({ message: "Something Failed" });
-  console.log("Flag", err);
+  logger.error(err.message);
+  return res.status(500).json({ message: "Something Failed" });
 }
