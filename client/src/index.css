@@ -43,8 +43,8 @@
 .container {
   width: 100%;
 
-  @media (width >= 28rem /* 448px */) {
-    max-width: 28rem /* 448px */;
+  @media (width >= 30rem /* 448px */) {
+    max-width: 30rem /* 448px */;
   }
   @media (width >= 40rem /* 640px */) {
     max-width: 40rem /* 640px */;
@@ -56,6 +56,10 @@
     max-width: 64rem /* 1024px */;
   }
   @media (width >= 80rem /* 1280px */) {
-    max-width: 88rem /* 1280px */;
+    max-width: 94rem /* 1280px */;
+  }
+  @media (width >= 100rem /* 1280px */) {
+    max-width: 115rem /* 1280px */;
   }
 }
+/* apmpamnpx */
