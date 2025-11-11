@@ -1,7 +1,7 @@
 const ExplorePage = () => {
   return (
     <>
-      <div className="container m-auto mt-6">
+      <div>
         <h5>Explore</h5>
         <p className="text-gray-500 mt-2">
           Discover amazing photos from talented photographers

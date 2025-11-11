@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 /* Optional: still fine to keep if you want to separate base */
@@ -12,7 +14,7 @@
 @layer base {
   body {
     /* font-family: "Quicksand", sans-serif; */
-    font-family: var(--font-quicksand);
+    font-family: "Quicksand", sans-serif;
   }
 
   h1 {
@@ -44,7 +46,7 @@
   width: 100%;
 
   @media (width >= 30rem /* 448px */) {
-    max-width: 30rem /* 448px */;
+    max-width: 28rem /* 448px */;
   }
   @media (width >= 40rem /* 640px */) {
     max-width: 40rem /* 640px */;
@@ -62,4 +64,3 @@
     max-width: 115rem /* 1280px */;
   }
 }
-/* apmpamnpx */
