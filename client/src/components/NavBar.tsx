@@ -15,7 +15,7 @@ const NavBar = () => {
       >
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2 p-4">
-            <div className="font-bold text-2xl text-gray-600">Lumina</div>
+            <div className="font-bold md:text-2xl text-gray-600">Lumina</div>
           </div>
           <form className="flex gap-2">
             <input
@@ -34,8 +34,21 @@ const NavBar = () => {
                 "
               placeholder="search photo"
             />
-            <button className="py-2 px-4 cursor-pointer bg-gray-300 rounded-4xl hover:bg-gray-400 hover:text-white flex items-center transition-all">
-              search
+            <button
+              className="
+                px-3 py-2            /* comfortable tap area on mobile */
+                md:px-5 md:py-2.5    /* slightly larger on desktops */
+                bg-gray-300 
+                text-sm md:text-base /* readable size across devices */
+                rounded-full         /* consistent modern shape */
+                hover:bg-gray-400 
+                hover:text-white
+                flex items-center justify-center
+                transition-all duration-200
+                active:scale-95      /* subtle press animation */
+                "
+            >
+              Search
             </button>
           </form>
         </div>
