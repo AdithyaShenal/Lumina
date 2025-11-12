@@ -5,6 +5,7 @@ border-gray-300
 --Shadow Setup--
 shadow-gray-300/85
 md:shadow-sm
+shadow-[0px_0px_5px_rgba(0,0,0,0.18)]
 
 
 --Primary Accent Color--

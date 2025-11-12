@@ -1,5 +1,7 @@
 import ProfilePic from "../assets/test_pic.jpg";
 import BackgroundImage from "../assets/background_img.jpg";
+import StatTab from "../components/StatTab";
+import ActivitiesTab from "../components/ActivitiesTab";
 
 const YouPage = () => {
   return (
@@ -14,6 +16,7 @@ const YouPage = () => {
             onClick={() => {}}
             style={{ backgroundImage: `url(${ProfilePic})` }}
             className="absolute
+              z-0
               w-32 h-32 
               bg-amber-200 
               bg-cover 
@@ -27,15 +30,16 @@ const YouPage = () => {
               shadow-[0px_0px_5px_rgba(0,0,0,0.18)]
               md:w-40 md:h-40 md:-top-22"
           ></div>
-          <div className="w-auto h-10 mt-2 ml-52">
+          <div className="w-auto ml-45 mt-2 md:ml-52">
             <span className="text-2xl font-bold">Adithya Shenal</span>
           </div>
-          <div className="w-auto h-10 ml-52">
+          <div className="w-auto ml-45 md:ml-52">
             <span className="text-gray-500">washenal55@gmail.com</span>
           </div>
         </div>
       </div>
-      <div className="w-auto h-12 rounded-2xl mt-2 shadow-[0px_0px_5px_rgba(0,0,0,0.18)]"></div>
+      <StatTab />
+      <ActivitiesTab />
     </>
   );
 };

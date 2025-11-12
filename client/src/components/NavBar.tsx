@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MobileNavBar from "./MobileNavBar";
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
@@ -11,17 +11,17 @@ const NavBar = () => {
   return (
     <>
       <nav
-        className="sticky 
+        className="
+          relative
           top-0 
           flex
-          bg-[oklch(98.4% 0.003 247.858)]
+          bg-white
           md:shadow-sm
           border-b
           border-gray-300
           shadow-gray-300/85
           text-sky-900
-          flex justify-center items-center
-          relative
+          justify-center items-center
           "
       >
         <div className="flex items-center gap-8">
@@ -52,34 +52,59 @@ const NavBar = () => {
           </form>
         </div>
 
+        {/* Nav Buttons */}
         <div className="flex-1 md:flex items-center justify-end gap-2 mr-2 hidden">
-          <Link to="/">
-            <div className="py-2 px-4 cursor-pointer rounded-full hover:bg-sky-100 flex items-center transition-all font-bold active:scale-97">
-              Home
-            </div>
-          </Link>
-          <Link to="/you">
-            <div className="py-2 px-4 cursor-pointer rounded-full hover:bg-sky-100 flex items-center transition-all font-bold active:scale-97">
-              You
-            </div>
-          </Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `py-2 px-4 cursor-pointer rounded-full flex items-center transition-all active:scale-97 ${
+                isActive
+                  ? "bg-sky-100 font-bold"
+                  : "hover:bg-sky-100 font-semibold"
+              }`
+            }
+          >
+            Explore
+          </NavLink>
 
-          <Link to="/explore">
-            <div className="py-2 px-4 cursor-pointer rounded-full hover:bg-sky-100 flex items-center transition-all font-bold active:scale-97">
-              <Link to="/explore">Explore</Link>
-            </div>
-          </Link>
+          <NavLink
+            to="/you"
+            className={({ isActive }) =>
+              `py-2 px-4 cursor-pointer rounded-full flex items-center transition-all active:scale-97 ${
+                isActive
+                  ? "bg-sky-100 font-bold"
+                  : "hover:bg-sky-100 font-semibold"
+              }`
+            }
+          >
+            You
+          </NavLink>
 
-          <Link to="/trending">
-            <div className="py-2 px-4 cursor-pointer rounded-full hover:bg-sky-100 flex items-center transition-all font-bold active:scale-97">
-              <Link to="/trending">Trending</Link>
-            </div>
-          </Link>
-          <div className="cursor-pointer ml-8 hover:bg-sky-100 p-2 flex items-center rounded-full transition-all active:scale-97">
-            <Link to="/">
-              <AiOutlineUser size={32} />
-            </Link>
-          </div>
+          <NavLink
+            to="/creators"
+            className={({ isActive }) =>
+              `py-2 px-4 cursor-pointer rounded-full flex items-center transition-all active:scale-97 ${
+                isActive
+                  ? "bg-sky-100 font-bold"
+                  : "hover:bg-sky-100 font-semibold"
+              }`
+            }
+          >
+            Creators
+          </NavLink>
+
+          <NavLink
+            to="/you"
+            className={({ isActive }) =>
+              `cursor-pointer ml-8 p-2 flex items-center rounded-full transition-all active:scale-97 ${
+                isActive
+                  ? "bg-sky-100 font-bold"
+                  : "hover:bg-sky-100 font-semibold"
+              }`
+            }
+          >
+            <AiOutlineUser size={32} />
+          </NavLink>
         </div>
 
         <button
@@ -119,7 +144,6 @@ const NavBar = () => {
         {mobMenuCollapse === true ? (
           <div
             className="w-[20rem]
-        
              right-3 
              top-14 
              drop-shadow-md 
@@ -130,24 +154,53 @@ const NavBar = () => {
              rounded-lg 
              md:hidden
              flex-col
+             z-999
              "
           >
-            <button></button>
-            <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
-              Home
-            </button>
-            <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
-              You
-            </button>
-            <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
-              Explore
-            </button>
-            <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
-              Trending
-            </button>
-            <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
-              <AiOutlineUser size={28} className="m-auto" />
-            </button>
+            <NavLink
+              to="/"
+              onClick={() => {
+                setMobMenuCollapse(false);
+                setBurgerButton(false);
+              }}
+            >
+              <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
+                Explore
+              </button>
+            </NavLink>
+            <NavLink
+              to="/you"
+              onClick={() => {
+                setMobMenuCollapse(false);
+                setBurgerButton(false);
+              }}
+            >
+              <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
+                You
+              </button>
+            </NavLink>
+            <NavLink
+              to="/creators"
+              onClick={() => {
+                setMobMenuCollapse(false);
+                setBurgerButton(false);
+              }}
+            >
+              <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
+                Creators
+              </button>
+            </NavLink>
+            <NavLink
+              to="/you"
+              onClick={() => {
+                setMobMenuCollapse(false);
+                setBurgerButton(false);
+              }}
+            >
+              <button className="w-full py-4 text-center hover:bg-sky-100 font-bold cursor-pointer active:scale-98">
+                <AiOutlineUser size={28} className="m-auto" />
+              </button>
+            </NavLink>
           </div>
         ) : (
           <></>
