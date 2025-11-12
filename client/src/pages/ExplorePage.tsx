@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 const menuItems = ["All", "Nature", "Wild", "Autumn", "Cities", "Water"];
 
 const ExplorePage = () => {
-  // const [category, setCategory] = useState<string>("");
-
   // Example image URLs (you can later fetch from API)
   const images = [
     "https://picsum.photos/1280/720?random=1",
