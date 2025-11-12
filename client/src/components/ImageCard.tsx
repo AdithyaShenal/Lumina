@@ -13,10 +13,8 @@ const ImageCard = ({ src }: { src: string }) => {
         className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
       />
 
-      {/* Avatar circle */}
       <div className="absolute left-3 bottom-3 w-12 h-12 rounded-full bg-gray-200 border-2 border-sky-900"></div>
 
-      {/* Caption overlay */}
       <div className="absolute bottom-4 left-16 text-xs bg-white/10 px-1 transition-all duration-300 group-hover:bg-white/70">
         Nature is awesome, beloved.
       </div>
