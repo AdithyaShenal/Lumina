@@ -5,10 +5,10 @@ interface Props {
 const CreatorCard = ({ image_url }: Props) => {
   return (
     <>
-      <div className="relative w-full max-w-xs p-2 rounded-xl bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-all duration-300 break-inside-avoid">
+      <div className="mx-auto relative w-full max-w-xs p-2 rounded-xl bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-all duration-300 break-inside-avoid">
         <img
           src={image_url}
-          className="h-1/3 bg-cover w-full rounded-t-xl"
+          className="h-1/3 object-cover w-full rounded-t-xl"
           loading="lazy"
         ></img>
         <div className=" h-2/3 overflow-hidden rounded-b-xl flex flex-col gap-2 text-center justify-center items-center p-2">

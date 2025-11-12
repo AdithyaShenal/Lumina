@@ -21,7 +21,13 @@ const images = [
 const CreatorsPage = () => {
   return (
     <>
-      <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+      {/* <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+        {images.map((img, index) => (
+          <CreatorCard image_url={img} key={index} />
+        ))}
+      </div> */}
+
+      <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-5 gap-4 space-y-4">
         {images.map((img, index) => (
           <CreatorCard image_url={img} key={index} />
         ))}

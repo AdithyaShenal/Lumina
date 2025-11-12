@@ -1,11 +1,10 @@
-import { useState } from "react";
 import ImageCard from "../components/ImageCard";
 import { Link } from "react-router-dom";
 
 const menuItems = ["All", "Nature", "Wild", "Autumn", "Cities", "Water"];
 
 const ExplorePage = () => {
-  const [category, setCategory] = useState<string>("");
+  // const [category, setCategory] = useState<string>("");
 
   // Example image URLs (you can later fetch from API)
   const images = [
