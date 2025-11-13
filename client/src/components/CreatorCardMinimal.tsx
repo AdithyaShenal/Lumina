@@ -1,18 +1,9 @@
-interface Props {
-  image_url: string;
-}
-
-const CreatorCard = ({ image_url }: Props) => {
+const CreatorCardMinimal = () => {
   return (
     <>
-      <div className="mx-auto relative w-full max-w-xs p-1 rounded-xl bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-all duration-300 break-inside-avoid">
-        <img
-          src={image_url}
-          className="h-1/3 object-cover w-full rounded-t-xl"
-          loading="lazy"
-        ></img>
+      <div className="w-full p-1 rounded-xl bg-white transition-all duration-300 break-inside-avoid">
         <div className=" h-2/3 overflow-hidden rounded-b-xl flex flex-col gap-2 text-center justify-center items-center p-2">
-          <div className="absolute w-24 h-24 bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] rounded-full top-12 left-1/2 -translate-x-1/2"></div>
+          <div className="w-24 h-24 bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] rounded-full top-12"></div>
           <div className="font-bold">Alex Rivera</div>
           <div className="text-xs text-gray-600">washenal55@gmail.com</div>
           <div className="text-xs text-gray-600">Cannon EOS 770D</div>
@@ -36,7 +27,6 @@ const CreatorCard = ({ image_url }: Props) => {
             flex 
             items-center
             justify-center
-            gap-1 
             text-sm
             bg-sky-800
             text-sky-50
@@ -53,4 +43,4 @@ const CreatorCard = ({ image_url }: Props) => {
   );
 };
 
-export default CreatorCard;
+export default CreatorCardMinimal;

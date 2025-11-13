@@ -1,7 +1,16 @@
 import ImageCard from "../components/ImageCard";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-const menuItems = ["All", "Nature", "Wild", "Autumn", "Cities", "Water"];
+const menuItems = [
+  "All",
+  "Nature",
+  "Wild",
+  "Autumn",
+  "Cities",
+  "Water",
+  "Sky",
+  "Sea",
+];
 
 const ExplorePage = () => {
   // Example image URLs (you can later fetch from API)
@@ -24,32 +33,36 @@ const ExplorePage = () => {
   ];
 
   return (
-    <div className="px-2">
-      <div className="flex gap-2 ml-2">
-        {menuItems.map((text) => (
-          <Link
+    <div className="">
+      <h4 className="text-sky-900">Explore</h4>
+      <p className="mt-3 text-gray-500">
+        Discover amazing photos from talented photographers
+      </p>
+      <div className="flex gap-2 mt-10 overflow-x-scroll scroll-smooth no-scrollbar">
+        {menuItems.map((text, index) => (
+          <NavLink
+            key={index}
             to=""
-            className="
-            border 
-            border-sky-900 
-            p-2
-            font-bold
-            min-w-12
-            rounded-full 
-            flex 
-            items-center
-            justify-center
-            gap-1 
-            text-sm
-            bg-sky-800
-            text-sky-50
-            transition-all
-            hover:bg-sky-900
-            cursor-pointer
-            "
+            className="border
+                    duration-400
+                    border-gray-400
+                    w-16
+                    text-sky-900  
+                    p-2 
+                    rounded-full
+                    font-semibold
+                    flex 
+                    items-center
+                    justify-center
+                    gap-1 
+                    text-sm             
+                    hover:bg-sky-900
+                    hover:text-sky-50
+                    transition-all
+                    "
           >
-            {text}
-          </Link>
+            <span>{text}</span>
+          </NavLink>
         ))}
       </div>
 

@@ -1,10 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const ActivitiesTab = () => {
   return (
     <>
       <div
-        className="w-auto h-12
+        className="h-12
         rounded-2xl 
         mt-2 px-1
         shadow-[0px_0px_5px_rgba(0,0,0,0.18)]
@@ -16,36 +16,54 @@ const ActivitiesTab = () => {
         bg-gray-100
         "
       >
-        <Link
+        <NavLink
           to="/you"
-          className="
-            text-center
-            w-full
-            p-2
-            rounded-xl
-            bg-white
-            hover:bg-sky-900
-            hover:text-sky-50
-            transition-all
-            "
+          className={({ isActive }) =>
+            `text-center w-full p-2 rounded-xl transition-all
+              hover:bg-sky-900 hover:text-sky-50
+              text-xs md:text-[1rem]
+              ${isActive ? "bg-sky-900 text-sky-50" : "bg-white"}
+            `
+          }
         >
           Your Photos
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/you/liked_photos"
-          className="
-            text-center
-            w-full
-            p-2
-            rounded-xl
-            bg-white
-            hover:bg-sky-900
-            hover:text-sky-50
-            transition-all
-            "
+          className={({ isActive }) =>
+            `text-center w-full p-2 rounded-xl transition-all
+              hover:bg-sky-900 hover:text-sky-50
+              text-xs md:text-[1rem]
+              ${isActive ? "bg-sky-900 text-sky-50" : "bg-white"}
+            `
+          }
         >
           Liked Photos
-        </Link>
+        </NavLink>
+        <NavLink
+          to=""
+          className={({ isActive }) =>
+            `text-center w-full p-2 rounded-xl transition-all
+              hover:bg-sky-900 hover:text-sky-50
+              text-xs md:text-[1rem]
+              ${isActive ? "bg-sky-900 text-sky-50" : "bg-white"}
+            `
+          }
+        >
+          Following
+        </NavLink>
+        <NavLink
+          to=""
+          className={({ isActive }) =>
+            `text-center w-full p-2 rounded-xl transition-all
+              hover:bg-sky-900 hover:text-sky-50
+              text-xs md:text-[1rem]
+              ${isActive ? "bg-sky-900 text-sky-50" : "bg-white"}
+            `
+          }
+        >
+          Followers
+        </NavLink>
       </div>
       <Outlet />
     </>

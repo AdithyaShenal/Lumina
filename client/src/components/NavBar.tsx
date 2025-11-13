@@ -3,6 +3,7 @@ import MobileNavBar from "./MobileNavBar";
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { AiOutlineUser } from "react-icons/ai";
+import Logo from "../assets/Lumina Logo.svg";
 
 const NavBar = () => {
   const [mobMenuCollapse, setMobMenuCollapse] = useState<boolean>(false);
@@ -25,10 +26,8 @@ const NavBar = () => {
           "
       >
         <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2 p-4">
-            <div className="font-bold text-lg md:text-2xl cursor-pointer active:scale-97">
-              Lumina
-            </div>
+          <div className="flex items-center gap-2 p-4 top-5 ml-4">
+            <img src={Logo} alt="Logo" width={120} />
           </div>
           <form className="flex gap-2">
             <input
@@ -42,7 +41,7 @@ const NavBar = () => {
                 bg-gray-100
                 backdrop-blur-md  
                 outline-sky-900
-                placeholder-sky-900/20
+                placeholder-sky-900/70
                 "
               placeholder="search photo"
             />
