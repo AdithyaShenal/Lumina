@@ -5,20 +5,20 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      minlength: 5,
-      maxlength: 50,
+      minlength: 3,
+      maxlength: 20,
       required: true,
       unique: true,
     },
     first_name: {
       type: String,
-      minlength: 5,
+      minlength: 3,
       maxlength: 50,
       required: true,
     },
     last_name: {
       type: String,
-      minlength: 5,
+      minlength: 3,
       maxlength: 50,
       required: true,
     },
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      minlength: 5,
+      minlength: 3,
       maxlength: 255,
       required: true,
       unique: true,
@@ -53,6 +53,10 @@ const userSchema = new mongoose.Schema(
       min: 0,
       max: 80,
     },
+    email_notifications: {
+      type: Boolean,
+      default: false,
+    },
     location: {
       type: String,
       maxlength: 50,
@@ -68,11 +72,12 @@ const User = mongoose.model("User", userSchema);
 
 export function validate(user) {
   const schema = Joi.object({
-    username: Joi.string().min(5).max(50).required(),
-    first_name: Joi.string().min(5).max(50).required(),
-    last_name: Joi.string().min(5).max(50).required(),
-    email: Joi.string().email().min(5).max(50).required(),
+    username: Joi.string().min(3).max(20).required(),
+    first_name: Joi.string().min(3).max(50).required(),
+    last_name: Joi.string().min(3).max(50).required(),
+    email: Joi.string().email().min(3).max(50).required(),
     password: Joi.string().min(5).max(50).required(),
+    email_notifications: Joi.bool().optional(),
     phone_number: Joi.string().min(10).max(20),
     age: Joi.number().min(0).max(80),
     location: Joi.string().min(2).max(50),
@@ -85,8 +90,8 @@ export function validate(user) {
 
 export function updateValidate(user) {
   const schema = Joi.object({
-    first_name: Joi.string().min(5).max(50),
-    last_name: Joi.string().min(5).max(50),
+    first_name: Joi.string().min(3).max(50),
+    last_name: Joi.string().min(3).max(50),
     phone_number: Joi.string().min(10).max(20),
     age: Joi.number().min(0).max(80),
     location: Joi.string().min(2).max(50),

@@ -1,4 +1,3 @@
-// import logger_module, { logger } from "./startup/logger.js";
 import express from "express";
 const app = express();
 import { natsClient } from "./events/nats-client.js";
@@ -11,6 +10,8 @@ import helmet from "helmet";
 import error from "./middleware/error.js";
 import { infoLogger } from "./startup/logger.js";
 import morgan from "morgan";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 await natsClient.connect("lumina", "userService", "http://localhost:4222");
 
@@ -20,6 +21,13 @@ db();
 
 app.use(morgan("tiny"));
 app.use(helmet());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/users", users);
 app.use("/api/login", login);

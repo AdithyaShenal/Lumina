@@ -1,9 +1,7 @@
+import { Toaster } from "react-hot-toast";
+
 function App() {
-  return (
-    <>
-      <p>Hello World</p>
-    </>
-  );
+  return <></>;
 }
 
 export default App;

@@ -1,18 +1,18 @@
 Meta Data
 
 Post Service
-Port - 3001
+Port -
 
 Search Service
-Port - 3002
+Port -
 
 User Service
-Port - 3003
+Port -
 
 Timeline Service
-Port - 3004
+Port -
 
 Event Service
-Port - 3005
+Port -
 
 NATS Port - 4222

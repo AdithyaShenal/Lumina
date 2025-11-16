@@ -1,9 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {
-  BlobServiceClient,
-  ContainerSASPermissions,
-} from "@azure/storage-blob";
+import { BlobServiceClient } from "@azure/storage-blob";
 import { natsClient } from "../events/nats-client.js";
 import auth from "../middleware/auth.js";
 import multer from "multer";
@@ -27,10 +24,12 @@ const upload = multer({ storage: storage });
 
 // me (Checked - Successfull)
 router.get("/me", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password -isAdmin");
+  const user = await User.findById(req.user._id).select(
+    "-password -isAdmin -createdAt -updatedAt"
+  );
   if (!user)
     return res.status(404).json({ success: false, message: "Invalid user" });
-  res.json(user);
+  res.status(200).send(user);
 });
 
 // User Registration
@@ -38,6 +37,9 @@ router.post("/", upload.single("profile_image"), async (req, res) => {
   if (req.body.interests && typeof req.body.interests === "string") {
     req.body.interests = JSON.parse(req.body.interests);
   }
+
+  req.body.email_notifications =
+    req.body.email_notifications === "true" ? true : false;
 
   const { error } = validate(req.body);
   if (error)
@@ -77,6 +79,7 @@ router.post("/", upload.single("profile_image"), async (req, res) => {
       "username",
       "first_name",
       "last_name",
+      "email_notifications",
       "email",
       "password",
       "profile_image",
@@ -104,9 +107,17 @@ router.post("/", upload.single("profile_image"), async (req, res) => {
     config.get("jwtPrivateKey")
   );
 
-  res
-    .header("Auth-token", token)
-    .json(_.pick(user, ["_id", "username", "email", "profile_image.url"]));
+  res.cookie("authToken", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    maxAge: 1000 * 60 * 60, //1 hour
+  });
+
+  res.status(201).json({
+    success: true,
+    message: "Account created successfully",
+  });
 });
 
 // User Update (Checked Successfull)

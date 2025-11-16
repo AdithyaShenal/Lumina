@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import config from "config";
 import bcrypt from "bcrypt";
 import _ from "lodash";
+import { success } from "zod";
 
 // Login Users
 // (Chekced - Successfull)
@@ -35,9 +36,14 @@ router.post("/", async (req, res) => {
     config.get("jwtPrivateKey")
   );
 
-  res
-    .header("Auth-token", token)
-    .json(_.pick(user, ["_id", "username", "email"]));
+  res.cookie("authToken", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    maxAge: 1000 * 60 * 60,
+  });
+
+  res.status(201).json({ success: true, message: "Successfully logged in" });
 });
 
 // Validation Login Service

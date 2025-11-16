@@ -28,7 +28,7 @@ const upload = multer({ storage: storage });
 router.post("/", auth, upload.single("post_image"), async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0].message });
-
+  console.log(req.file);
   const file = req.file;
   if (!file) return res.status(400).json({ message: "No post image found" });
 

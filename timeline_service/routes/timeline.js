@@ -3,16 +3,13 @@ const router = express.Router();
 import Timeline from "../models/timeline.js";
 
 // Get timeline of a user
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   // No need validations just grab the user ID from jwt query the timeline and send
 
   try {
     const followedPosts = await Timeline.findOne({ user_id: req.params.id });
 
-    if (!followedPosts)
-      return res
-        .status(200)
-        .json({ success: true, message: "No users followed yet" });
+    if (!followedPosts) return res.status(200).send([]);
 
     res.status(200).send(followedPosts.posts);
   } catch (err) {

@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import ImageCard from "../components/ImageCard";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const menuItems = [
   "All",
@@ -12,25 +14,47 @@ const menuItems = [
   "Sea",
 ];
 
+interface Image {
+  post_id: string;
+  user_id: string;
+  image_url: string;
+  image_name: string;
+  time_stamp: string;
+  caption: string | undefined | null;
+  location: string | undefined | null;
+  post_type: string;
+}
+
 const ExplorePage = () => {
-  // Example image URLs (you can later fetch from API)
-  const images = [
-    "https://picsum.photos/1280/720?random=1",
-    "https://picsum.photos/1280/720?random=2",
-    "https://picsum.photos/1280/720?random=3",
-    "https://picsum.photos/1280/720?random=4",
-    "https://picsum.photos/1280/720?random=5",
-    "https://picsum.photos/1280/720?random=6",
-    "https://picsum.photos/1280/720?random=7",
-    "https://picsum.photos/1280/720?random=8",
-    "https://picsum.photos/1280/720?random=9",
-    "https://picsum.photos/1280/720?random=10",
-    "https://picsum.photos/1280/720?random=11",
-    "https://picsum.photos/1280/720?random=12",
-    "https://picsum.photos/1280/720?random=13",
-    "https://picsum.photos/1280/720?random=14",
-    "https://picsum.photos/1280/720?random=15",
-  ];
+  const {
+    data: timeline,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Image[], Error>({
+    queryKey: ["timeline"],
+    queryFn: () =>
+      axios
+        .get<Image[]>("http://localhost:4004/api/timeline")
+        .then((res) => res.data),
+  });
+
+  console.log(timeline);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    // This catches failed requests (4xx, 5xx, network errors)
+    console.error("Query Error:", error);
+    return (
+      <div className="text-red-600 p-4 border border-red-300 rounded-lg">
+        Error loading timeline data! Check the server at
+        {error && <p className="text-sm mt-2">{error.message}</p>}
+      </div>
+    );
+  }
 
   return (
     <div className="">
@@ -39,9 +63,9 @@ const ExplorePage = () => {
         Discover amazing photos from talented photographers
       </p>
       <div className="flex gap-2 mt-10 overflow-x-scroll scroll-smooth no-scrollbar">
-        {menuItems.map((text, index) => (
+        {menuItems.map((text) => (
           <NavLink
-            key={index}
+            key={text}
             to=""
             className="border
                     duration-400
@@ -66,11 +90,18 @@ const ExplorePage = () => {
         ))}
       </div>
 
-      {/* Masonry grid */}
       <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-        {images.map((img, i) => (
-          <ImageCard key={i} src={img} />
-        ))}
+        {timeline &&
+          timeline.length > 0 &&
+          timeline.map((image) => (
+            <ImageCard key={image.post_id} src={image.image_url} />
+          ))}
+
+        {timeline && timeline.length === 0 && (
+          <i className="text-gray-500">
+            You have not followed any creators yet.
+          </i>
+        )}
       </div>
     </div>
   );

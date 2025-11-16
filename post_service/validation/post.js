@@ -5,7 +5,7 @@ export default function validate(body) {
     caption: Joi.string(),
     post_type: Joi.string().max(50),
     location: Joi.string().max(255),
-  });
+  }).unknown(true);
 
   return schema.validate(body);
 }

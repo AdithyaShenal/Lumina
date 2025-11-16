@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { PiLeafFill } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const ImageCard = ({ src }: { src: string }) => {
   const [like, setLike] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
-    <div
-      onClick={() => {
-        navigate(`/view_image/${encodeURIComponent(src)}`);
-      }}
-      className="relative overflow-hidden rounded-xl shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-shadow duration-300 break-inside-avoid p-1 group"
-    >
+    <div className="relative overflow-hidden rounded-xl shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-shadow duration-300 break-inside-avoid p-1 group">
       <img
+        // onClick={() => {
+        //   navigate(`/view_image/${encodeURIComponent(src)}`);
+        // }}
         src={src}
         alt="explore"
         loading="lazy"

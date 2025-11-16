@@ -1,6 +1,7 @@
 import { GoUpload } from "react-icons/go";
 import { VscSettings } from "react-icons/vsc";
 import { TbListDetails } from "react-icons/tb";
+import { NavLink } from "react-router-dom";
 
 const StatTab = () => {
   return (
@@ -31,7 +32,8 @@ const StatTab = () => {
           </div>
         </div>
         <div className="flex gap-4 items-center">
-          <button
+          <NavLink
+            to="/upload"
             className="border 
             border-sky-900 
             p-2 
@@ -47,7 +49,7 @@ const StatTab = () => {
           >
             <GoUpload />
             <span className="hidden md:block">Upload</span>
-          </button>
+          </NavLink>
           <button
             className="border 
             border-sky-900 
