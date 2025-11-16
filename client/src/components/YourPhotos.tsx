@@ -1,30 +1,51 @@
+import { useQuery } from "@tanstack/react-query";
 import YourImageCard from "./YourImageCard";
+import axios from "axios";
 
-const images = [
-  "https://picsum.photos/1280/720?random=1",
-  "https://picsum.photos/1280/720?random=2",
-  "https://picsum.photos/1280/720?random=3",
-  "https://picsum.photos/1280/720?random=4",
-  "https://picsum.photos/1280/720?random=5",
-  "https://picsum.photos/1280/720?random=6",
-  "https://picsum.photos/1280/720?random=7",
-  "https://picsum.photos/1280/720?random=8",
-  "https://picsum.photos/1280/720?random=9",
-  "https://picsum.photos/1280/720?random=10",
-  "https://picsum.photos/1280/720?random=11",
-  "https://picsum.photos/1280/720?random=12",
-  "https://picsum.photos/1280/720?random=13",
-  "https://picsum.photos/1280/720?random=14",
-  "https://picsum.photos/1280/720?random=15",
-];
+interface Photo {
+  post_id: string;
+  user_id: string;
+  image_url: string;
+  time_stamp: string;
+  caption: string;
+  location: string;
+  post_type?: string;
+}
 
 const YourPhotos = () => {
+  const {
+    data: photos,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Photo[], Error>({
+    queryKey: ["userPosts"],
+    queryFn: () =>
+      axios
+        .get("http://localhost:4002/api/queries/user/posts/all", {
+          withCredentials: true,
+        })
+        .then((res) => res.data),
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (isError) return <div>{error.message}</div>;
+
+  if (!photos || photos?.length === 0) {
+    return (
+      <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg mt-5">
+        You haven't uploaded any photos yet.
+      </div>
+    );
+  }
+
   return (
     <>
       <p className="mt-3 text-gray-500">Your photos</p>
       <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-        {images.map((img, i) => (
-          <YourImageCard key={i} src={img} />
+        {photos?.map((photo) => (
+          <YourImageCard key={photo.post_id} src={photo.image_url} />
         ))}
       </div>
     </>

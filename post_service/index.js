@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import posts from "./routes/posts.js";
+import queries from "./routes/query.js";
 import { natsClient } from "./events/nats-client.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(morgan("short"));
 app.use(express.json());
 app.use("/api/posts", posts);
+app.use("/api/queries", queries);
 
 const port = process.env.PORT || 4002;
 app.listen(4002, () => {

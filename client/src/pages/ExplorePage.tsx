@@ -18,11 +18,11 @@ interface Image {
   post_id: string;
   user_id: string;
   image_url: string;
-  image_name: string;
+  image_name?: string;
   time_stamp: string;
-  caption: string | undefined | null;
-  location: string | undefined | null;
-  post_type: string;
+  caption?: string;
+  location?: string;
+  post_type?: string;
 }
 
 const ExplorePage = () => {
@@ -35,7 +35,9 @@ const ExplorePage = () => {
     queryKey: ["timeline"],
     queryFn: () =>
       axios
-        .get<Image[]>("http://localhost:4004/api/timeline")
+        .get<Image[]>("http://localhost:4002/api/queries/posts/all", {
+          withCredentials: true,
+        })
         .then((res) => res.data),
   });
 
@@ -46,7 +48,6 @@ const ExplorePage = () => {
   }
 
   if (isError) {
-    // This catches failed requests (4xx, 5xx, network errors)
     console.error("Query Error:", error);
     return (
       <div className="text-red-600 p-4 border border-red-300 rounded-lg">
