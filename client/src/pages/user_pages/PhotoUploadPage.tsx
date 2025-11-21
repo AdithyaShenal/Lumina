@@ -1,10 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { useForm, type FieldValues } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const PhotoUploadPage = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const useUploadPhoto = useMutation({
     mutationFn: (post: any) =>
       axios
@@ -13,7 +17,11 @@ const PhotoUploadPage = () => {
         })
         .then((res) => res.data),
 
-    onSuccess: () => toast.success("Upload successful"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userPosts"] });
+      toast.success("Upload successful");
+      navigate("/you");
+    },
 
     onError: (error) => {
       let message = "Upload failed. Please check your login status";

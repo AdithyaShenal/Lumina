@@ -1,19 +1,3 @@
-// import { Navigate, Outlet } from "react-router-dom";
-// import useAuth from "../hooks/useAuth";
-
-// const PrivateRoutes = () => {
-//   const { data: user } = useAuth();
-//   console.log("Private Routes:", user);
-
-//   if (!user) {
-//     return <Navigate to="/login" />;
-//   }
-
-//   return <Outlet />;
-// };
-
-// export default PrivateRoutes;
-
 // PrivateRoutes.tsx
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";

@@ -1,5 +1,5 @@
-import StatTab from "../components/StatTab";
-import ActivitiesTab from "../components/ActivitiesTab";
+import StatTab from "../../components/user_comp/StatTab";
+import ActivitiesTab from "../../components/user_comp/ActivitiesTab";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 

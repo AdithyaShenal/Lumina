@@ -1,20 +1,3 @@
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
-
-// const useAuth = () => {
-//   return useQuery({
-//     queryKey: ["user"],
-//     queryFn: () =>
-//       axios
-//         .get("http://localhost:4000/api/users/me", { withCredentials: true })
-//         .then((res) => res.data),
-
-//     retry: false,
-//   });
-// };
-
-// export default useAuth;
-
 // useAuth.ts
 import { useQuery } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";

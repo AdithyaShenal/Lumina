@@ -1,18 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
 import ExplorePage from "../pages/ExplorePage";
-import YouPage from "../pages/YouPage";
+import YouPage from "../pages/user_pages/YouPage";
 import Layout from "../pages/Layout";
-import CreatorsPage from "../pages/CreatorsPage";
-import LikedPhotos from "../components/LikedPhotos";
-import YourPhotos from "../components/YourPhotos";
-import ImageViewPage from "../pages/ImageViewPage";
-import YourImageViewPage from "../pages/YourImageViewPage";
+import CreatorsPage from "../pages/creator_pages/CreatorsPage";
+import LikedPhotos from "../components/user_comp/LikedPhotos";
+import YourPhotos from "../components/user_comp/YourPhotos";
+import ImageViewPage from "../pages/creator_pages/ImageViewPage";
+import YourImageViewPage from "../pages/user_pages/YourImageViewPage";
 import ErrorPage from "../pages/ErrorPage";
 import PrivateRoutes from "./PrivateRoutes";
 import LoginPage from "../pages/LoginPage";
 import PublicRoutes from "./PublicRoutes";
 import RegisterPage from "../pages/RegisterPage";
-import PhotoUploadPage from "../pages/PhotoUploadPage";
+import PhotoUploadPage from "../pages/user_pages/PhotoUploadPage";
+import SettingsPage from "../pages/user_pages/SettingsPage";
+import CreatorProfile from "../pages/creator_pages/CreatorProfile";
+import CreatorPhotos from "../components/creator_comp/CreatorPhotos";
+import CreatorFollowers from "../components/creator_comp/CreatorFollowers";
+import CreatorFollowing from "../components/creator_comp/CreatorFollowing";
 
 const router = createBrowserRouter([
   {
@@ -46,10 +51,20 @@ const router = createBrowserRouter([
               { path: "liked_photos", element: <LikedPhotos /> },
             ],
           },
+          { path: "settings", element: <SettingsPage /> },
           { path: "upload", element: <PhotoUploadPage /> },
           { path: "creators", element: <CreatorsPage /> },
-          { path: "view_image/:src", element: <ImageViewPage /> },
-          { path: "view_your_image/:src", element: <YourImageViewPage /> },
+          {
+            path: "creator_profile/:creator_id",
+            element: <CreatorProfile />,
+            children: [
+              { index: true, element: <CreatorPhotos /> },
+              { path: "followers", element: <CreatorFollowers /> },
+              { path: "following", element: <CreatorFollowing /> },
+            ],
+          },
+          { path: "view_image/:post_id", element: <ImageViewPage /> },
+          { path: "view_your_image/:post_id", element: <YourImageViewPage /> },
         ],
       },
     ],

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import config from "config";
 
 export default function (req, res, next) {
-  const token = req.header("Auth-token");
+  const token = req.cookies["authToken"];
   if (!token)
     return res
       .status(401)
@@ -13,6 +13,6 @@ export default function (req, res, next) {
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Invalid token." });
+    return res.status(401).json({ message: err.message });
   }
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import ImageCard from "../components/ImageCard";
+import ImageCard from "../components/creator_comp/ImageCard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const menuItems = [
   "Sea",
 ];
 
-interface Image {
+export interface Image {
   post_id: string;
   user_id: string;
   image_url: string;
@@ -95,7 +95,7 @@ const ExplorePage = () => {
         {timeline &&
           timeline.length > 0 &&
           timeline.map((image) => (
-            <ImageCard key={image.post_id} src={image.image_url} />
+            <ImageCard key={image.post_id} imageData={image} />
           ))}
 
         {timeline && timeline.length === 0 && (

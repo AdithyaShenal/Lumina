@@ -13,7 +13,10 @@ export class PostCreatedListener extends Listener {
       // find all followed that user
       const followers = await Follower.find({ target_user_id: data.user_id });
 
-      if (followers.length === 0) return;
+      if (followers.length === 0) {
+        message.ack();
+        return;
+      }
 
       // update time line of each follower (put that post top of the timeline)
       for (const follower of followers) {

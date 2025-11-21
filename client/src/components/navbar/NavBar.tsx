@@ -3,14 +3,19 @@ import MobileNavBar from "./MobileNavBar";
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { AiOutlineUser } from "react-icons/ai";
-import Logo from "../assets/Lumina Logo.svg";
+import Logo from "../../assets/Lumina Logo.svg";
+import { Toaster } from "react-hot-toast";
+import { useLogout } from "../../hooks/useLogout";
 
 const NavBar = () => {
   const [mobMenuCollapse, setMobMenuCollapse] = useState<boolean>(false);
   const [burgerButton, setBurgerButton] = useState<boolean>(false);
 
+  const useUserLogout = useLogout();
+
   return (
     <>
+      <Toaster />
       <nav
         className="
           relative
@@ -91,6 +96,8 @@ const NavBar = () => {
           >
             Creators
           </NavLink>
+
+          <button onClick={() => useUserLogout.mutate()}>Log out</button>
 
           <NavLink
             to="/you"
@@ -189,6 +196,14 @@ const NavBar = () => {
                 Creators
               </button>
             </NavLink>
+
+            <button
+              onClick={() => useUserLogout.mutate()}
+              className="w-full py-4 text-center text-red-500 hover:bg-sky-100 font-bold cursor-pointer active:scale-98"
+            >
+              Log out
+            </button>
+
             <NavLink
               to="/you"
               onClick={() => {

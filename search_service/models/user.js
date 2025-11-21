@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema(
       min: 0,
       max: 80,
     },
+    email_notifications: {
+      type: Boolean,
+      default: false,
+    },
     location: {
       type: String,
       maxlength: 50,
@@ -62,6 +66,7 @@ export function userEventsValidate(user) {
     first_name: Joi.string().min(5).max(50).required(),
     last_name: Joi.string().min(5).max(50).required(),
     email: Joi.string().email().min(5).max(50).required(),
+    email_notifications: Joi.bool().optional(),
     profile_image: Joi.object(),
     phone_number: Joi.string().min(10).max(20),
     age: Joi.number().min(0).max(80),

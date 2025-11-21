@@ -8,19 +8,17 @@ import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import "./index.css";
 
 // This is the global place to override query settings but also you do this inside each useQuery()
-// const queryClient = new QueryClient({
-//   defaultOptions: {
-//     queries: {
-//       gcTime: 300_000, // garbage collection Time (5mins) 300_000ms
-//       staleTime: 0,
-//       refetchOnWindowFocus: true,
-//       refetchOnReconnect: true,
-//       refetchOnMount: true,
-//     },
-//   },
-// });
-
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 300_000, // garbage collection Time (5mins) 300_000ms
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+      refetchOnMount: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

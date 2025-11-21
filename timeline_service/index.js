@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { natsClient } from "./events/nats-client.js";
 import timeline from "./routes/timeline.js";
-import posts from "./routes/posts.js";
 import { PostCreatedListener } from "./events/listeners/post-created-listener.js";
 import { PostDeletedListener } from "./events/listeners/post-deleted-listener.js";
 import { UserFollowedListener } from "./events/listeners/user-followed-listener.js";
@@ -36,7 +35,6 @@ app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use("/api/timeline/", timeline);
-app.use("/api/posts/", posts);
 
 const port = process.env.PORT || 4004;
 app.listen(4004, () => console.log(`Listening to Port: 4004`));

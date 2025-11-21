@@ -3,6 +3,7 @@ const app = express();
 import { natsClient } from "./events/nats-client.js";
 import users from "./routes/users.js";
 import login from "./routes/login.js";
+import logout from "./routes/logout.js";
 import folllowers from "./routes/followers.js";
 import db from "./startup/db.js";
 import config from "config";
@@ -29,8 +30,9 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use("/api/users", users);
 app.use("/api/login", login);
+app.use("/api/users", users);
+app.use("/api/logout", logout);
 app.use("/api/followers", folllowers);
 app.use(error);
 

@@ -1,19 +1,3 @@
-// import { Navigate, Outlet } from "react-router-dom";
-// import useAuth from "../hooks/useAuth";
-
-// const PublicRoutes = () => {
-//   const { data: user } = useAuth();
-//   console.log("Public Routes:", user);
-
-//   if (user) {
-//     return <Navigate to="/" />;
-//   }
-
-//   return <Outlet />;
-// };
-
-// export default PublicRoutes;
-
 // PublicRoutes.tsx
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
