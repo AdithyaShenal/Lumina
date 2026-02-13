@@ -1,6 +1,6 @@
-#Lumina
+# Lumina
 
-##An event-driven image-sharing platform built on a fully asynchronous microservice architecture using Node.js, NATS, Docker, and Kubernetes.
+## An event-driven image-sharing platform built on a fully asynchronous microservice architecture using Node.js, NATS, Docker, and Kubernetes.
 
 I architected and developed Lumina as a fully asynchronous, event-driven image-sharing web application, with a strong focus on microservice architecture, service isolation, and system-level communication patterns.
 
