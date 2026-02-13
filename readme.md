@@ -6,7 +6,7 @@ Lumina is a high-performance web application engineered with a focus on service 
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The backend is composed of independent **Node.js microservices**, each responsible for a single business capability. To ensure strict isolation, each service owns its own data and communicates exclusively through **asynchronous events** rather than direct REST calls.
 
@@ -17,7 +17,7 @@ The backend is composed of independent **Node.js microservices**, each responsib
 
 ---
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 | Category | Technologies |
 | :--- | :--- |
@@ -28,7 +28,7 @@ The backend is composed of independent **Node.js microservices**, each responsib
 
 ---
 
-## 🚀 Key Features & Implementation
+## Key Features & Implementation
 
 ### **Shared Internal NPM Package**
 To enforce consistency and **DRY** (Don't Repeat Yourself) principles, I developed a private library consumed by all microservices. This package encapsulates:
@@ -46,7 +46,7 @@ Authentication is handled via **JWT-based stateless tokens**. Security logic is 
 
 ---
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 1. **Clone the repository**
    ```bash
