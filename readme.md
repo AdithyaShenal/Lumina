@@ -21,10 +21,10 @@ The backend is composed of independent **Node.js microservices**, each responsib
 
 | Category | Technologies |
 | :--- | :--- |
-| **Programming Languages** | Java, JavaScript, TypeScript |
-| **Frameworks & Libraries** | Node.js, Express.js, Java Spring Boot, React.js, Socket.io, Tailwind CSS |
-| **Database & Caching** | MySQL, MongoDB, Redis |
-| **Infrastructure & Tools** | Docker, Kubernetes, Nginx, Git, GitHub, Postman, RESTful APIs, JWT |
+| **Programming Languages** | JavaScript, TypeScript |
+| **Frameworks & Libraries** | Node.js, Express.js, React.js, Tailwind CSS |
+| **Database & Caching** | MySQL, MongoDB |
+| **Infrastructure & Tools** | Docker, Kubernetes, Nginx, Git, GitHub, Postman, RESTful APIs, Microservices, Event Driven Model, JWT |
 
 ---
 
