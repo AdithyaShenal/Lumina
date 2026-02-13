@@ -6,10 +6,11 @@ I architected and developed Lumina as a fully asynchronous, event-driven image-s
 
 ---
 The backend is composed of independent Node.js microservices, each responsible for a single business capability:
--> User Service – authentication and user management
--> Post Service – image and post creation
--> Search Service – content searching
--> Timeline Service – personalized feed aggregation
+
+- User Service – authentication and user management
+- Post Service – image and post creation
+- Search Service – content searching
+- Timeline Service – personalized feed aggregation
 Each service owns its own data and responsibilities, communicating exclusively through events rather than direct service-to-service calls.
 ---
 
