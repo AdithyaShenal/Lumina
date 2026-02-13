@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ActivitiesTab = () => {
   return (
@@ -17,7 +17,8 @@ const ActivitiesTab = () => {
         "
       >
         <NavLink
-          to="/you"
+          end
+          to="."
           className={({ isActive }) =>
             `text-center w-full p-2 rounded-xl transition-all
               hover:bg-sky-900 hover:text-sky-50
@@ -41,7 +42,7 @@ const ActivitiesTab = () => {
           Liked Photos
         </NavLink>
         <NavLink
-          to=""
+          to="following"
           className={({ isActive }) =>
             `text-center w-full p-2 rounded-xl transition-all
               hover:bg-sky-900 hover:text-sky-50
@@ -53,7 +54,7 @@ const ActivitiesTab = () => {
           Following
         </NavLink>
         <NavLink
-          to=""
+          to="followers"
           className={({ isActive }) =>
             `text-center w-full p-2 rounded-xl transition-all
               hover:bg-sky-900 hover:text-sky-50
@@ -65,7 +66,6 @@ const ActivitiesTab = () => {
           Followers
         </NavLink>
       </div>
-      <Outlet />
     </>
   );
 };

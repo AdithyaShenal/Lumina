@@ -1,0 +1,80 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: lumina.com
+      http:
+        paths:
+          # User service routes
+          - path: /api/login
+            pathType: Prefix
+            backend:
+              service:
+                name: user-srv
+                port:
+                  number: 4000
+          - path: /api/users
+            pathType: Prefix
+            backend:
+              service:
+                name: user-srv
+                port:
+                  number: 4000
+          - path: /api/logout
+            pathType: Prefix
+            backend:
+              service:
+                name: user-srv
+                port:
+                  number: 4000
+          - path: /api/followers
+            pathType: Prefix
+            backend:
+              service:
+                name: user-srv
+                port:
+                  number: 4000
+          # Post service routes
+          - path: /api/posts
+            pathType: Prefix
+            backend:
+              service:
+                name: post-srv
+                port:
+                  number: 4002
+          - path: /api/queries
+            pathType: Prefix
+            backend:
+              service:
+                name: post-srv
+                port:
+                  number: 4002
+          # Search service routes
+          - path: /api/search
+            pathType: Prefix
+            backend:
+              service:
+                name: search-srv
+                port:
+                  number: 4001
+          # Timeline service routes
+          - path: /api/timeline
+            pathType: Prefix
+            backend:
+              service:
+                name: timeline-srv
+                port:
+                  number: 4004
+          # Client (catch-all - must be last)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import YouFollowingCard from "./YouFollowingCard";
 import axios from "axios";
-import { useOutletContext } from "react-router-dom";
-import CreatorCard from "./CreatorCard";
-import { type Creator } from "../../components/creator_comp/CreatorCard";
+import type { Creator } from "../creator_comp/CreatorCard";
+// import { useOutletContext } from "react-router-dom";
 
-const CreatorFollowing = () => {
-  const creator_id = useOutletContext<string>();
+const YouFollowing = () => {
+  // const user_id = useOutletContext<string>();
 
   const {
     data: creators,
@@ -13,14 +13,16 @@ const CreatorFollowing = () => {
     error,
     isLoading,
   } = useQuery<Creator[], Error>({
-    queryKey: ["following", creator_id],
+    queryKey: ["following"],
     queryFn: () =>
       axios
-        .get(`http://localhost:4001/api/followers/${creator_id}/following`, {
+        .get(`http://localhost:4001/api/followers/following`, {
           withCredentials: true,
         })
         .then((res) => res.data),
   });
+
+  console.log(creators);
 
   if (isError) return <div>{error.message}</div>;
 
@@ -30,10 +32,10 @@ const CreatorFollowing = () => {
     <>
       <div className="mt-5 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-10">
         {creators?.length === 0 ? (
-          <div>Not followed yet</div>
+          <div className="mt-3 text-gray-500">Not following yet</div>
         ) : (
           creators?.map((creator) => (
-            <CreatorCard creatorData={creator} key={creator._id} />
+            <YouFollowingCard creatorData={creator} key={creator._id} />
           ))
         )}
       </div>
@@ -41,4 +43,4 @@ const CreatorFollowing = () => {
   );
 };
 
-export default CreatorFollowing;
+export default YouFollowing;

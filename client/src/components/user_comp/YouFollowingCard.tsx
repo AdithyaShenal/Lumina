@@ -1,7 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
   creatorData: Creator;
@@ -23,33 +20,11 @@ export interface Creator {
   interests?: string[];
 }
 
-const CreatorCard = ({ creatorData }: Props) => {
+const YouFollowingCard = ({ creatorData }: Props) => {
   const navigate = useNavigate();
-
-  const useFollowCreator = useMutation({
-    mutationFn: () =>
-      axios
-        .post(
-          `http://localhost:4000/api/followers/${creatorData._id}`,
-          {},
-          { withCredentials: true },
-        )
-        .then((res) => res.data),
-
-    onSuccess: (response) => {
-      if (response?.message === "Already following") {
-        toast.success("Already following");
-      } else {
-        toast.success(
-          `Following ${creatorData.first_name} ${creatorData.last_name}`,
-        );
-      }
-    },
-  });
 
   return (
     <>
-      <Toaster />
       <div className="mx-auto relative w-full max-w-xs p-1 rounded-xl bg-white shadow-[0px_0px_5px_rgba(0,0,0,0.18)] hover:shadow-lg transition-all duration-300 break-inside-avoid">
         <div
           style={{
@@ -76,7 +51,6 @@ const CreatorCard = ({ creatorData }: Props) => {
           </div>
 
           <button
-            onClick={() => useFollowCreator.mutate()}
             className="
             border 
             border-sky-900 
@@ -96,7 +70,7 @@ const CreatorCard = ({ creatorData }: Props) => {
             cursor-pointer
             "
           >
-            Follow
+            Unfollow
           </button>
         </div>
       </div>
@@ -104,4 +78,4 @@ const CreatorCard = ({ creatorData }: Props) => {
   );
 };
 
-export default CreatorCard;
+export default YouFollowingCard;

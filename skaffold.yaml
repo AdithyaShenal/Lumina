@@ -1,0 +1,60 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: lumina
+
+build:
+  local:
+    push: false
+  artifacts:
+    - image: lumina-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*"
+            dest: /app/src
+
+    - image: lumina-user
+      context: user-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: /app
+
+    - image: lumina-post
+      context: post-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: /app
+
+    - image: lumina-search
+      context: search-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: /app
+
+    - image: lumina-timeline
+      context: timeline-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: /app
+
+manifests:
+  rawYaml:
+    - infra/k8s/*
+
+deploy:
+  kubectl: {}

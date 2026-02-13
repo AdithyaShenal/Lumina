@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeline-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timeline
+  template:
+    metadata:
+      labels:
+        app: timeline
+    spec:
+      containers:
+        - name: timeline
+          image: lumina-timeline
+          ports:
+            - containerPort: 4004
+          env:
+            - name: PORT
+              value: "4004"
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: "lumina"
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MONGO_URI
+              value: "mongodb://mongo-srv:27017/lumina_TimelineServiceDB"
+            - name: CORS_ORIGIN
+              value: "http://lumina.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeline-srv
+spec:
+  selector:
+    app: timeline
+  type: ClusterIP
+  ports:
+    - name: timeline
+      protocol: TCP
+      port: 4004
+      targetPort: 4004

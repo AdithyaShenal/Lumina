@@ -6,7 +6,7 @@ import User from "../models/user.js";
 
 // Get all followers of the Current User
 router.get("/", auth, async (req, res) => {
-  const followers = await Follower.find({ target_user_id: req.user_id });
+  const followers = await Follower.find({ target_user_id: req.user._id });
 
   if (followers.length === 0) return res.status(200).json([]);
 
@@ -19,7 +19,7 @@ router.get("/", auth, async (req, res) => {
 
 // Get all the following users of the Current User (me -> others)
 router.get("/following", auth, async (req, res) => {
-  const following = await Follower.find({ user_id: req.user_id });
+  const following = await Follower.find({ user_id: req.user._id });
 
   if (following.length === 0) return res.status(200).json([]);
 

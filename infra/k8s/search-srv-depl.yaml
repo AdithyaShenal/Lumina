@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      containers:
+        - name: search
+          image: lumina-search
+          ports:
+            - containerPort: 4001
+          env:
+            - name: PORT
+              value: "4001"
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: "lumina"
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MONGO_URI
+              value: "mongodb://mongo-srv:27017/lumina_SearchServiceDB"
+            - name: CORS_ORIGIN
+              value: "http://lumina.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-srv
+spec:
+  selector:
+    app: search
+  type: ClusterIP
+  ports:
+    - name: search
+      protocol: TCP
+      port: 4001
+      targetPort: 4001

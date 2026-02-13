@@ -13,4 +13,17 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    host: true,
+    port: 3000,
+    strictPort: true,
+    watch: {
+      usePolling: true,
+    },
+    hmr: {
+      protocol: "ws",
+      host: "localhost",
+      port: 3000,
+    },
+  },
 });

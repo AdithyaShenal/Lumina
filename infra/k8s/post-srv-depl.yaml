@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post
+  template:
+    metadata:
+      labels:
+        app: post
+    spec:
+      containers:
+        - name: post
+          image: lumina-post
+          ports:
+            - containerPort: 4002
+          env:
+            - name: PORT
+              value: "4002"
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: "lumina"
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: CORS_ORIGIN
+              value: "http://lumina.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-srv
+spec:
+  selector:
+    app: post
+  type: ClusterIP
+  ports:
+    - name: post
+      protocol: TCP
+      port: 4002
+      targetPort: 4002

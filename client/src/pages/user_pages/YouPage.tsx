@@ -2,6 +2,7 @@ import StatTab from "../../components/user_comp/StatTab";
 import ActivitiesTab from "../../components/user_comp/ActivitiesTab";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
+import { Outlet } from "react-router-dom";
 
 interface CurrentUser {
   _id: string;
@@ -71,6 +72,7 @@ const YouPage = () => {
       </div>
       <StatTab />
       <ActivitiesTab />
+      <Outlet context={user?._id} />
     </>
   );
 };

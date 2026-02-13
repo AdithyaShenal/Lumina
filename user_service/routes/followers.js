@@ -35,8 +35,8 @@ router.post("/:target_user_id", auth, async (req, res) => {
     if (err.code === 11000) {
       // For Duplicate key error handling
       return res
-        .status(400)
-        .json({ success: false, message: "Already following" });
+        .status(201)
+        .json({ success: true, message: "Already following" });
     }
     next(err);
   }

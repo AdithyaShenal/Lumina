@@ -20,6 +20,8 @@ export class UserFollowedListener extends Listener {
       } else {
         console.log("Error saving follower:", err.message);
       }
+
+      message.ack();
     }
   }
 }

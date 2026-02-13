@@ -18,6 +18,8 @@ import CreatorProfile from "../pages/creator_pages/CreatorProfile";
 import CreatorPhotos from "../components/creator_comp/CreatorPhotos";
 import CreatorFollowers from "../components/creator_comp/CreatorFollowers";
 import CreatorFollowing from "../components/creator_comp/CreatorFollowing";
+import YouFollowing from "../components/user_comp/YouFollowing";
+import YouFollowers from "../components/user_comp/YouFollowers";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +51,8 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <YourPhotos /> },
               { path: "liked_photos", element: <LikedPhotos /> },
+              { path: "following", element: <YouFollowing /> },
+              { path: "followers", element: <YouFollowers /> },
             ],
           },
           { path: "settings", element: <SettingsPage /> },

@@ -3,7 +3,7 @@ import Follower from "../../models/follower.js";
 
 export class UserFollowedListener extends Listener {
   subject = Subjects["UserFollowed"];
-  queueGroupName = "searchService";
+  queueGroupName = "timelineService";
 
   async onMessage(data, message) {
     console.log("Event Data: ", data);

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: lumina-user
+          ports:
+            - containerPort: 4000
+          env:
+            - name: PORT
+              value: "4000"
+            - name: NATS_URL
+              value: "http://nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: "lumina"
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MONGO_URI
+              value: "mongodb://mongo-srv:27017/lumina_UserServiceDB"
+            - name: CORS_ORIGIN
+              value: "http://lumina.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-srv
+spec:
+  selector:
+    app: user
+  type: ClusterIP
+  ports:
+    - name: user
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
