@@ -45,9 +45,3 @@ Authentication is handled via **JWT-based stateless tokens**. Security logic is 
 * **Ingress:** Traffic is routed through an **NGINX Ingress Controller**, acting as the primary load balancer and API gateway.
 
 ---
-
-## Installation & Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone [https://github.com/your-username/lumina.git](https://github.com/your-username/lumina.git)
