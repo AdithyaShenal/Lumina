@@ -7,7 +7,7 @@ const useAuth = () => {
     queryKey: ["user"],
     queryFn: async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/users/me", {
+        const res = await axios.get("http://lumina.com/api/users/me", {
           withCredentials: true,
         });
         // Return the actual user data on success

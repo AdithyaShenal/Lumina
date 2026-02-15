@@ -35,7 +35,7 @@ const ExplorePage = () => {
     queryKey: ["timeline"],
     queryFn: () =>
       axios
-        .get<Image[]>("http://localhost:4002/api/queries/posts/all", {
+        .get<Image[]>("http://lumina.com/api/queries/posts/all", {
           withCredentials: true,
         })
         .then((res) => res.data),

@@ -10,11 +10,11 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: () =>
       axios.post(
-        "http://localhost:4000/api/logout",
+        "http://lumina.com/api/logout",
         {},
         {
           withCredentials: true,
-        }
+        },
       ),
 
     onSuccess: () => {

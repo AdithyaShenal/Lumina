@@ -16,7 +16,7 @@ const CreatorFollowers = () => {
     queryKey: ["followers", creator_id],
     queryFn: () =>
       axios
-        .get(`http://localhost:4001/api/followers/${creator_id}`, {
+        .get(`http://lumina.com/api/followers/${creator_id}`, {
           withCredentials: true,
         })
         .then((res) => res.data),

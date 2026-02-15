@@ -20,7 +20,7 @@ const LoginPage = () => {
   const useUserLogin = useMutation<Response, AxiosError<any>, LoginFormData>({
     mutationFn: (userData: LoginFormData) =>
       axios
-        .post("http://localhost:4000/api/login", userData, {
+        .post("http://lumina.com/api/login", userData, {
           withCredentials: true,
         })
         .then((res) => res.data),

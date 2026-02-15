@@ -30,7 +30,7 @@ const CreatorCard = ({ creatorData }: Props) => {
     mutationFn: () =>
       axios
         .post(
-          `http://localhost:4000/api/followers/${creatorData._id}`,
+          `http://lumina.com/api/followers/${creatorData._id}`,
           {},
           { withCredentials: true },
         )

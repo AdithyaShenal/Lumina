@@ -25,7 +25,7 @@ const CreatorPhotos = () => {
     queryKey: ["creatorPhotos"],
     queryFn: () =>
       axios
-        .get(`http://localhost:4002/api/queries/user/posts/${creator_id}`, {
+        .get(`http://lumina.com/api/queries/user/posts/${creator_id}`, {
           withCredentials: true,
         })
         .then((res) => res.data)

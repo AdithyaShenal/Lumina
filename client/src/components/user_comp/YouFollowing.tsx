@@ -16,7 +16,7 @@ const YouFollowing = () => {
     queryKey: ["following"],
     queryFn: () =>
       axios
-        .get(`http://localhost:4001/api/followers/following`, {
+        .get(`http://lumina.com/api/followers/following`, {
           withCredentials: true,
         })
         .then((res) => res.data),

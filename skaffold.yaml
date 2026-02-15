@@ -17,7 +17,7 @@ build:
             dest: /app/src
 
     - image: lumina-user
-      context: user-service
+      context: user_service
       docker:
         dockerfile: Dockerfile
       sync:
@@ -26,7 +26,7 @@ build:
             dest: /app
 
     - image: lumina-post
-      context: post-service
+      context: post_service
       docker:
         dockerfile: Dockerfile
       sync:
@@ -35,7 +35,7 @@ build:
             dest: /app
 
     - image: lumina-search
-      context: search-service
+      context: search_service
       docker:
         dockerfile: Dockerfile
       sync:
@@ -44,7 +44,7 @@ build:
             dest: /app
 
     - image: lumina-timeline
-      context: timeline-service
+      context: timeline_service
       docker:
         dockerfile: Dockerfile
       sync:

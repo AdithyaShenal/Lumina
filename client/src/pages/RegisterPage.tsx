@@ -64,7 +64,7 @@ const RegisterPage = () => {
   const useUserRegsiter = useMutation<Response, AxiosError<any>, FormData>({
     mutationFn: (user: FormData) =>
       axios
-        .post("http://localhost:4000/api/users", user, {
+        .post("http://lumina.com/api/users", user, {
           withCredentials: true,
         })
         .then((res) => res.data),
@@ -91,7 +91,7 @@ const RegisterPage = () => {
     formData.append("password", data.password);
     formData.append(
       "email_notifications",
-      (data.email_notifications ?? false).toString()
+      (data.email_notifications ?? false).toString(),
     );
 
     console.log(data);

@@ -29,7 +29,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: MONGO_URI
-              value: "mongodb://mongo-srv:27017/lumina_SearchServiceDB"
+              value: "mongodb+srv://washenal55:washenal_admin@mycluster.ja90lnb.mongodb.net/lumina-search-db?retryWrites=true&w=majority"
             - name: CORS_ORIGIN
               value: "http://lumina.com"
 ---

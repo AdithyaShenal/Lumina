@@ -17,6 +17,7 @@ export default defineConfig({
     host: true,
     port: 3000,
     strictPort: true,
+    allowedHosts: ["lumina.com", "localhost"],
     watch: {
       usePolling: true,
     },

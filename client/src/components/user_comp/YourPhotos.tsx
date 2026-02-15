@@ -23,7 +23,7 @@ const YourPhotos = () => {
     queryKey: ["userPosts"],
     queryFn: () =>
       axios
-        .get("http://localhost:4002/api/queries/user/posts/all", {
+        .get("http://lumina.com/api/queries/user/posts/all", {
           withCredentials: true,
         })
         .then((res) => res.data),

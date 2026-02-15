@@ -30,6 +30,8 @@ spec:
                   fieldPath: metadata.name
             - name: CORS_ORIGIN
               value: "http://lumina.com"
+            - name: DATABASE_URL
+              value: "mysql://root:adithya123@host.docker.internal:3306/lumina_postservicedb"
 ---
 apiVersion: v1
 kind: Service
